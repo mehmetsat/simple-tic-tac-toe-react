@@ -42,17 +42,20 @@ function Square(props) {
         this.state = {
             squares : Array(9).fill(null),
             xIsNext : true,
+            counter : 1,
         };
     }
 
     handleClick(i) {
+        console.log('1')
         const squares = this.state.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
             return;
           }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({squares : squares,
-                       xIsNext : !this.state.xIsNext})
+                       xIsNext : !this.state.xIsNext,
+                       counter : this.state.counter + 1})
     }
 
     renderSquare(i) {
@@ -71,24 +74,27 @@ function Square(props) {
       let status;
       if (winner) {
           status = 'Winner: ' + winner
-      } else {
+      } else if (this.state.counter === 10) {
+          status = 'Tie!!'
+      }
+      else {
         status = 'Next player:'+ (this.state.xIsNext ? 'X' : 'O');
       }
   
       return (
         <div>
-          <div className="status">{status}</div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
+            <div className="status" >{status} </div>
+            <div className="board-row ">
+                {this.renderSquare(0)}
+                {this.renderSquare(1)}
+                {this.renderSquare(2)}
+            </div>
+          <div className="board-row ">
             {this.renderSquare(3)}
             {this.renderSquare(4)}
             {this.renderSquare(5)}
           </div>
-          <div className="board-row">
+          <div className="board-row ">
             {this.renderSquare(6)}
             {this.renderSquare(7)}
             {this.renderSquare(8)}
@@ -101,7 +107,7 @@ function Square(props) {
   class Game extends React.Component {
     render() {
       return (
-        <div className="game">
+        <div className="game center">
           <div className="game-board">
             <Board />
           </div>
