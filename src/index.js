@@ -7,7 +7,7 @@ function Square(props) {
 
     
       return (
-        <button className="square" 
+        <button className="square card container" 
                 onClick={props.onClick}
         >
           {props.value}
@@ -107,14 +107,11 @@ function Square(props) {
   class Game extends React.Component {
     render() {
       return (
-        <div className="game center">
+        <div className="game center card">
           <div className="game-board">
-            <Board />
+            <Board className="container"/>
           </div>
-          <div className="game-info">
-            <div>{/* status */}</div>
-            <ol>{/* TODO */}</ol>
-          </div>
+
         </div>
       );
     }
